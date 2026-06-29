@@ -30,7 +30,7 @@ mcp = FastMCP(
         "search_chicago_property_by_address, then call "
         "get_cook_county_property_dossier (full record), get_cook_county_parcel "
         "(cheap single lookup), or find_chicago_comparable_sales (comps + "
-        "valuation). Each data tool is paid per call via x402 (USDC on Base or "
+        "valuation). These data tools return joined, derived answers — including permit→PIN links and comparable-sales valuation that raw Cook County open-data / SoQL queries can't return, not raw rows to stitch. Each is paid per call via x402 (USDC on Base or "
         "Solana) and returns an HTTP 402 with machine-readable payment terms until "
         "paid. Coverage: Cook County, Illinois incl. the City of Chicago; public "
         "records only, no personal data."
@@ -94,7 +94,7 @@ def get_cook_county_property_dossier(pin: _PIN) -> dict:
 
     Returns parcel basics PLUS recorded sales & deed history, building permits,
     and property-tax assessment history, joined and normalized into one record —
-    the one-call due-diligence answer. Use for valuation, underwriting, title and
+    the one-call due-diligence answer. Permits are LINKED to the PIN here (the raw permit open-data has no PIN; links are derived by address + geo match) — a join you can't reproduce with raw open-data queries. Use for valuation, underwriting, title and
     lien research prep, and lead enrichment. Paid: $0.03 per call via x402. Public
     records only; no owner or occupant personal data.
     """
@@ -108,7 +108,7 @@ def find_chicago_comparable_sales(pin: _PIN) -> dict:
     Returns recent arm's-length sales in the same assessor neighborhood and
     property class as the subject PIN (last ~18 months), plus an implied
     low/median/high price range. Non-arm's-length and multi-parcel deeds are
-    filtered out. Use for valuation, investment screening, and underwriting.
+    filtered out — a derived valuation you won't get from a raw open-data query. Use for valuation, investment screening, and underwriting.
     Paid: $0.10 per call via x402.
     """
     return _get(_seg("/v1/comps", pin))
