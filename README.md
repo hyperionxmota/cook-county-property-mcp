@@ -1,5 +1,7 @@
 # Cook County / Chicago Property Data — MCP server
 
+[![hyperionxmota/cook-county-property-mcp MCP server](https://glama.ai/mcp/servers/hyperionxmota/cook-county-property-mcp/badges/score.svg)](https://glama.ai/mcp/servers/hyperionxmota/cook-county-property-mcp)
+
 A hosted, **pay-per-call** [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server for **Cook County, Illinois — including the City of Chicago** — property records: parcels, recorded sales & deed history, building permits, and property-tax assessment history, joined and normalized into one answer. Plus comparable sales (comps) and a lightweight automated valuation.
 
 No signup, no API key — pay per call via the [x402](https://x402.org) protocol (USDC on Base or Solana).
