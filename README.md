@@ -4,6 +4,16 @@ A hosted, **pay-per-call** [Model Context Protocol](https://modelcontextprotocol
 
 No signup, no API key — pay per call via the [x402](https://x402.org) protocol (USDC on Base or Solana).
 
+## What this adds over raw open data
+
+This returns **finished, joined answers** — not raw rows you have to query and stitch. The county open data (Socrata) can't give you:
+
+- **Building permits linked to a PIN.** The Chicago permits feed has **no PIN field** — the permit→parcel link is *derived here* (exact address match + nearest-parcel geo match). You can't reproduce this with a raw SoQL query.
+- **A street address on a parcel.** Parcel Universe has **no address**; it's joined in from a separate dataset here.
+- **Comparable-sales valuation.** Arm's-length filtering, same-neighborhood/class matching, and an implied low/median/high range — derived analysis, not a row fetch.
+
+So one call returns a normalized property record; against raw open data you'd orchestrate multiple datasets and rebuild joins that don't exist upstream.
+
 ## Connect
 
 - **Remote MCP endpoint:** `https://api.ingest0r.com/mcp` (streamable-http — add it to any MCP client; nothing to install)
